@@ -51,7 +51,32 @@ module Enumerable
     end
     items
   end
+
+  def my_all?
+    bool_item = true
+    my_each do |item|
+      bool_item = false unless yield(item)
+    end
+    bool_item
+  end
+
+  def my_any?
+    bool_item = false
+    my_each do |item|
+      bool_item = true if yield(item)
+    end
+    bool_item
+  end
+  
+  def my_none?
+    bool_item = true
+    my_each do |item|
+      bool_item = false if yield(item)
+    end
+    bool_item
+  end
 end
+
 temp_array = %w[cat dog fish turtle]
 range = (2..4)
 temp_number = [1, 2, 3, 4, 5, 6]
@@ -91,3 +116,24 @@ puts ' '
 puts temp_number.select(&:even?)
 puts ' '
 puts temp_number.my_select(&:even?)
+puts ' '
+puts ' ####################################### '
+puts ' ############### my_all ################ '
+puts ' ####################################### '
+puts ' '
+temp = temp_array.all? { |word| word.length >= 3 }
+puts temp
+puts ' '
+temp = temp_array.my_all? { |word| word.length >= 3 }
+puts temp
+puts ' '
+puts ' ####################################### '
+puts ' ############## my_any? ################ '
+puts ' ####################################### '
+puts ' '
+temp = temp_array.any? { |word| word.length >= 7 }
+puts temp
+puts ' '
+temp = temp_array.my_any? { |word| word.length >= 7 }
+puts = temp
+puts ' '
