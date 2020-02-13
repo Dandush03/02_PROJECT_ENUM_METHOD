@@ -135,5 +135,14 @@ temp = temp_array.any? { |word| word.length >= 7 }
 puts temp
 puts ' '
 temp = temp_array.my_any? { |word| word.length >= 7 }
-puts = temp
+puts temp
 puts ' '
+puts ' ####################################### '
+puts ' ############## my_none? ############### '
+puts ' ####################################### '
+puts ' '
+temp = temp_array.none? { |word| word.length >= 7}
+puts temp
+puts ' '
+temp = temp_array.my_none? { |word| word.length >= 7}
+puts temp
