@@ -91,6 +91,18 @@ module Enumerable
     end
     new_items
   end
+
+  def my_inject(temp_option = nil)
+    new_items = temp_option || shift
+    my_each do |item|
+      new_items = yield(new_items, item)
+    end
+    new_items
+  end
+end
+
+def multiply_els(array_num)
+  array_num.my_inject { |results, number| results * number }
 end
 
 temp_array = %w[cat dog fish turtle]
@@ -187,6 +199,25 @@ puts ' ####################################### '
 puts ' ############# my_inject ############### '
 puts ' ####################################### '
 puts ' '
-temp = temp_number.inject {}
+temp = temp_number.inject(0) { |results, elements| results + elements }
 puts temp
-temp = temp_number.my_inject {}
+puts ' '
+temp = temp_number.my_inject(0) { |results, elements| results + elements }
+puts temp
+puts ' '
+puts ' ####################################### '
+puts ' ############ multiply_els ############# '
+puts ' ####################################### '
+puts ' '
+temp = multiply_els(temp_number)
+puts temp
+puts ' '
+puts ' ####################################### '
+puts ' ########### proc challenge ############ '
+puts ' ####################################### '
+puts ' '
+temp = proc { |number| number * 4 }
+puts temp_number.my_map(&temp)
+puts ' '
+temp = temp_number.my_map { |number| number * 2 }
+puts temp
