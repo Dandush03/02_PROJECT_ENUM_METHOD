@@ -75,6 +75,14 @@ module Enumerable
     end
     bool_item
   end
+
+  def my_count
+    counter = 0
+    my_each do |item|
+      counter += 1
+    end
+    counter
+  end
 end
 
 temp_array = %w[cat dog fish turtle]
@@ -146,3 +154,14 @@ puts temp
 puts ' '
 temp = temp_array.my_none? { |word| word.length >= 7 }
 puts temp
+puts ' '
+puts ' ####################################### '
+puts ' ############## my_count? ############### '
+puts ' ####################################### '
+puts ' '
+temp = temp_num.count { |num| (num % 3).zero? }
+puts temp
+puts ' '
+temp = tem_num.my_count { |num| (num % 3).zero? }
+puts temp
+puts ' '
