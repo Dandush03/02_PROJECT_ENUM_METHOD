@@ -67,7 +67,7 @@ module Enumerable
     end
     bool_item
   end
-  
+
   def my_none?
     bool_item = true
     my_each do |item|
@@ -97,7 +97,7 @@ temp_array.my_each { |n| puts n }
 puts ' '
 puts ' ####################################### '
 puts ' ######### my_each_with_index ########## '
-puts ' ####################################### '
+puts ' ####################################### ' 
 puts ' '
 puts ' ############# Range Type ############## '
 range.each_with_index { |n, m| puts "#{n}:#{m}" }
@@ -141,8 +141,8 @@ puts ' ####################################### '
 puts ' ############## my_none? ############### '
 puts ' ####################################### '
 puts ' '
-temp = temp_array.none? { |word| word.length >= 7}
+temp = temp_array.none? { |word| word.length >= 7 }
 puts temp
 puts ' '
-temp = temp_array.my_none? { |word| word.length >= 7}
+temp = temp_array.my_none? { |word| word.length >= 7 }
 puts temp
