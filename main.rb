@@ -84,8 +84,12 @@ module Enumerable
     counter
   end
 
-  def map
-    
+  def my_map
+    new_items = []
+    my_each do |item|
+      new_items << yield(item)
+    end
+    new_items
   end
 end
 
@@ -173,3 +177,16 @@ puts ' ####################################### '
 puts ' ############### my_map ################ '
 puts ' ####################################### '
 puts ' '
+temp = temp_number.map { |num| num * 2 }
+puts temp
+puts ' '
+temp = temp_number.my_map { |num| num * 2 }
+puts temp
+puts ' '
+puts ' ####################################### '
+puts ' ############# my_inject ############### '
+puts ' ####################################### '
+puts ' '
+temp = temp_number.inject {}
+puts temp
+temp = temp_number.my_inject {}
