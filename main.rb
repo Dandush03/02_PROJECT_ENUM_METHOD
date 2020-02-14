@@ -9,7 +9,7 @@ module Enumerable
         min += 1
       end
 
-    else
+    elsif block_given?
       min = 0
       max = length
 
@@ -17,7 +17,8 @@ module Enumerable
         yield(self[min])
         min += 1
       end
-
+    else
+      to_enum(:my_each)
     end
   end
 
