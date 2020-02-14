@@ -84,10 +84,10 @@ module Enumerable
     counter
   end
 
-  def my_map
+  def my_map(is_proc = nil)
     new_items = []
     my_each do |item|
-      new_items << yield(item)
+      is_proc ? new_items.push(is_proc.call(item)) : new_items << yield(item)
     end
     new_items
   end
@@ -217,7 +217,7 @@ puts ' ########### proc challenge ############ '
 puts ' ####################################### '
 puts ' '
 temp = proc { |number| number * 4 }
-puts temp_number.my_map(&temp)
+puts temp_number.my_map(temp)
 puts ' '
 temp = temp_number.my_map { |number| number * 2 }
 puts temp
