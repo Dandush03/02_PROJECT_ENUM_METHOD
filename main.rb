@@ -79,9 +79,13 @@ module Enumerable
   def my_count
     counter = 0
     my_each do |item|
-      counter += 1
+      counter += 1 if yield(item)
     end
     counter
+  end
+
+  def map
+    
   end
 end
 
@@ -105,7 +109,7 @@ temp_array.my_each { |n| puts n }
 puts ' '
 puts ' ####################################### '
 puts ' ######### my_each_with_index ########## '
-puts ' ####################################### ' 
+puts ' ####################################### '
 puts ' '
 puts ' ############# Range Type ############## '
 range.each_with_index { |n, m| puts "#{n}:#{m}" }
@@ -156,12 +160,16 @@ temp = temp_array.my_none? { |word| word.length >= 7 }
 puts temp
 puts ' '
 puts ' ####################################### '
-puts ' ############## my_count? ############### '
+puts ' ############## my_count ############### '
 puts ' ####################################### '
 puts ' '
-temp = temp_num.count { |num| (num % 3).zero? }
+temp = temp_number.count { |num| (num % 3).zero? }
 puts temp
 puts ' '
-temp = tem_num.my_count { |num| (num % 3).zero? }
+temp = temp_number.my_count { |num| (num % 3).zero? }
 puts temp
+puts ' '
+puts ' ####################################### '
+puts ' ############### my_map ################ '
+puts ' ####################################### '
 puts ' '
