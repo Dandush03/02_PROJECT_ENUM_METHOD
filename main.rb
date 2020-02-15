@@ -78,7 +78,9 @@ module Enumerable
     end
     bool_item
   end
+end
 
+module Enumerable
   def my_none?
     if block_given?
       bool_item = true
