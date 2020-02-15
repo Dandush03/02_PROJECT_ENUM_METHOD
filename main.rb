@@ -33,7 +33,7 @@ module Enumerable
         index += 1
       end
 
-    else
+    elsif block_given?
       min = 0
       max = length
 
@@ -41,56 +41,78 @@ module Enumerable
         yield(self[min], min)
         min += 1
       end
-
+    else
+      to_enum(:my_each_with_index)
     end
   end
 
   def my_select
-    items = []
-    my_each do |item|
-      items << item if yield(item)
+    if block_given?
+      items = []
+      my_each do |item|
+        items << item if yield(item)
+      end
+      items
+    else
+      to_enum(:my_select)
     end
-    items
   end
 
   def my_all?
     bool_item = true
-    my_each do |item|
-      bool_item = false unless yield(item)
+    if block_given?
+      my_each do |item|
+        bool_item = false unless yield(item)
+      end
     end
     bool_item
   end
 
   def my_any?
-    bool_item = false
-    my_each do |item|
-      bool_item = true if yield(item)
+    bool_item = true
+    if block_given?
+      bool_item = false
+      my_each do |item|
+        bool_item = true if yield(item)
+      end
     end
     bool_item
   end
 
   def my_none?
-    bool_item = true
-    my_each do |item|
-      bool_item = false if yield(item)
+    if block_given?
+      bool_item = true
+      my_each do |item|
+        bool_item = false if yield(item)
+      end
+    else
+      bool_item = false
     end
     bool_item
   end
 
   def my_count
-    counter = 0
-    my_each do |item|
-      counter += 1 if yield(item)
+    if block_given?
+      counter = 0
+      my_each do |item|
+        counter += 1 if yield(item)
+      end
+    else
+      counter = length
     end
     counter
   end
 
   def my_map(is_proc = nil)
-    new_items = []
-    my_each do |item|
-      is_proc ? new_items.push(is_proc.call(item)) : new_items << yield(item)
+    if block_given?
+      new_items = []
+      my_each do |item|
+        is_proc ? new_items.push(is_proc.call(item)) : new_items << yield(item)
+      end
+      new_items
+    else
+      to_enum(:my_map)
     end
-    new_items
   end
 
   def my_inject(temp_option = nil)
@@ -222,3 +244,21 @@ puts temp_number.my_map(temp)
 puts ' '
 temp = temp_number.my_map { |number| number * 2 }
 puts temp
+puts '#########################################'
+puts temp_number.each
+puts temp_number.my_each
+puts temp_number.my_each
+puts temp_number.each_with_index
+puts temp_number.my_each_with_index
+puts temp_number.select
+puts temp_number.my_select
+puts temp_number.all?
+puts temp_number.my_all?
+puts temp_number.any?
+puts temp_number.my_any?
+puts temp_number.none?
+puts temp_number.my_none?
+puts temp_number.count
+puts temp_number.my_count
+puts temp_number.map
+puts temp_number.my_map
