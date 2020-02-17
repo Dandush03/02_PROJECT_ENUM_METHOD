@@ -153,7 +153,3 @@ end
 def multiply_els(array_num)
   array_num.my_inject { |results, number| results * number }
 end
-
-true_array = [nil, false, true, []] 
-false_array = [nil, false, nil, false]
-puts true_array.my_none?(&false_block) == array.none?(&false_block)
