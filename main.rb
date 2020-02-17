@@ -67,11 +67,11 @@ module Enumerable
     if opt.nil? && block_given?
       my_each { |item| bool_item = false unless yield(item) }
     elsif opt.is_a?(Regexp)
-      my_each { |item| bool_item = false if item.match(opt) }
+      my_each { |item| bool_item = false unless item.match(opt) }
     elsif opt.is_a?(Module)
       my_each { |item| bool_item = false unless item.is_a?(opt) }
     else
-      my_each { |item| bool_item = false if item.nil? || item == false }
+      my_each { |item| bool_item = false unless item.nil? || item == false }
     end
     bool_item
   end
@@ -85,7 +85,7 @@ module Enumerable
     elsif opt.is_a?(Module)
       my_each { |item| bool_item = true if item.is_a?(opt) }
     else
-      my_each { |item| bool_item = true unless item.nil? || item == false }
+      my_each { |item| bool_item = true if item.nil? || item == false }
     end
     bool_item
   end
@@ -99,7 +99,7 @@ module Enumerable
     elsif opt.is_a?(Module)
       my_each { |item| bool_item = false if item.is_a?(opt) }
     else
-      my_each { |item| bool_item = false unless item.nil? || item == false }
+      my_each { |item| bool_item = false if item.nil? || item == false }
     end
     bool_item
   end
@@ -153,3 +153,7 @@ end
 def multiply_els(array_num)
   array_num.my_inject { |results, number| results * number }
 end
+
+true_array = [nil, false, true, []] 
+false_array = [nil, false, nil, false]
+puts true_array.my_none?(&false_block) == array.none?(&false_block)
