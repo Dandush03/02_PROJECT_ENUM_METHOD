@@ -71,7 +71,7 @@ module Enumerable
     elsif opt.is_a?(Module)
       my_each { |item| bool_item = false unless item.is_a?(opt) }
     else
-      my_each { |item| bool_item = false unless item.nil? || item == false }
+      my_each { |item| bool_item = false if item.nil? || item == false }
     end
     bool_item
   end
